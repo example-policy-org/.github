@@ -1,3 +1,3 @@
 # Example policy organisation
 
-demo to show versioned local, ci and cluster based cluster evaluation
+Example organisation supporting the Appvia [Policy as \[Versioned\] Code](https://www.appvia.io/blog/policy-as-versioned-code) blog post
