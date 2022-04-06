@@ -1,0 +1,44 @@
+digraph G {
+  policy [shape=cylinder]
+
+  policy100 [label="@1.0.0", shape=cds]
+  policy200 [label="@2.0.0", shape=cds]
+  policy201 [label="@2.0.1", shape=cds]
+
+  policy -> policy100,policy200,policy201 [color="yellow", arrowType="none"]
+  app1 [shape=cylinder]
+  app2 [shape=cylinder]
+  app3 [shape=cylinder]
+  infra1 [shape=cylinder]
+  infra2 [shape=cylinder]
+  infra3 [shape=cylinder]
+  e2e [shape=cylinder]
+  policychecker [shape=cylinder,label="policy-checker"]
+
+  app1,app2,app3,infra1,infra2,infra3 -> policychecker
+
+  app1 -> policy100 [color=green]
+  app1 -> policy200,policy201 [color=red,style=dashed]
+
+  app2 -> policy201 [color=green]
+  app2 -> policy100,policy200 [color=orange,style=dashed]
+
+  app3 -> policy100 [color=green]
+  app3 -> policy200,policy200 [color=orange,style=dashed]
+
+  e2e -> policy100,policy200,policy201
+
+  subgraph cluster_01 { 
+    node [shape=plaintext]
+    rankdir=LR;
+    label = "Legend"
+
+    start1,start2,start3,start4,end1,end2,end3,end4 [style=invisible]
+
+    start1 -> end1 [label="Dependent\non"]
+    start2 -> end2 [label="Compliant\nwith", color=green]
+    start3 -> end3 [label="Not-compliant\nwith", color=red]
+    start4 -> end4 [label="Child\nof", color="yellow"]
+
+  }
+}
